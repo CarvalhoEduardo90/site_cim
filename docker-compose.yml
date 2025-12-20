@@ -1,0 +1,42 @@
+# Docker Compose for Production/Staging
+# To run: docker-compose up --build
+
+services:
+  backend:
+    build: ./backend
+    restart: always
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_TYPE=mysql
+      - DB_HOST=db
+      - DB_USER=cim_user
+      - DB_PASS=cim_password
+      - DB_NAME=cim_db
+      - JWT_SECRET=production_secret_key
+    depends_on:
+      - db
+    networks:
+      - cim-network
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: cim_db
+      MYSQL_USER: cim_user
+      MYSQL_PASSWORD: cim_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - cim-network
+
+networks:
+  cim-network:
+
+
+volumes:
+  db_data:

@@ -1,0 +1,7 @@
+{
+  "name": "CIM SEMADEC Portal",
+  "description": "Plataforma completa da Escola de Missões CIM SEMADEC, incluindo área do aluno, galeria, notícias e inscrições.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
